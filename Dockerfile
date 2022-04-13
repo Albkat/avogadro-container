@@ -22,7 +22,9 @@ RUN useradd -m $USERNAME \
  && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$USERNAME \
  && chmod 0440 /etc/sudoers.d/$USERNAME \
  && usermod  --uid 1000 $USERNAME \
- && groupmod --gid 1000 $USERNAME
+ && groupmod --gid 1000 $USERNAME \
+ && mkdir /home/$USERNAME \
+ && chown $USERNAME -R /home/$USERNAME
 
 USER $USERNAME
 ENTRYPOINT ["/usr/bin/avogadro"]
